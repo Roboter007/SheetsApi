@@ -8,7 +8,7 @@ import java.nio.file.Path;
 
 public class LanguageConfig {
 
-    public final static Path path = JavaUtils.getPathAddition(PathsUtils.OVERWORLD_FOLDER_PATH, "/sheetsApi/players/" + SheetsApi.getPlugin().getName());
+    public final static Path path = JavaUtils.getPathAddition(PathsUtils.PLUGINS_FOLDER_PATH, "/SheetsApi/players/" + SheetsApi.getPlugin().getName());
 
     public void load() {
 

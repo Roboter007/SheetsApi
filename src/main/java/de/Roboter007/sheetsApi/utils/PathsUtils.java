@@ -16,7 +16,6 @@ public class PathsUtils {
     public static Path THE_END_FOLDER_PATH = getWorldFolderPath("world_the_end");
 
 
-
     public static Path getWorldFolderPath(String worldName) {
         World world = Bukkit.getWorld(worldName);
         if(world != null) {
