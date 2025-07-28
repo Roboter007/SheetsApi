@@ -25,7 +25,6 @@ public abstract class LanguageConfig {
     public LanguageConfig(JavaPlugin plugin) {
         this.plugin = plugin;
         this.path = JavaUtils.getPathAddition(LANG_FOLDER_PATH, plugin.getName());
-        load();
     }
 
     public void load() {
