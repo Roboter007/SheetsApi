@@ -4,14 +4,13 @@ import de.Roboter007.sheetsApi.SheetsApi;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.jetbrains.annotations.NotNull;
 
-public class SheetsConfig {
+import java.util.List;
 
-    public static FileConfiguration configuration = SheetsApi.getPlugin().getConfig();
+public abstract class SheetsConfig implements ISheetConfig {
 
+    private static final FileConfiguration configuration = SheetsApi.getPlugin().getConfig();
 
-    public static void saveConfig() {
-        SheetsApi.getPlugin().saveConfig();
-    }
+    public static String LANG_CONFIG_KEY = "lang";
 
     @NotNull
     @SuppressWarnings("unchecked")
@@ -24,12 +23,28 @@ public class SheetsConfig {
         }
     }
 
+    public void saveConfig() {
+        SheetsApi.getPlugin().saveConfig();
+    }
+
     public void setValue(String path, Object object) {
         configuration.set(path, object);
     }
 
-    public void loadDefaultConfig() {
-        setValue("lang", "en_us");
+    private void addComment(String key, String message) {
+        List<String> comments = configuration.getComments(key);
+        comments.add(message);
+        configuration.setInlineComments(key, comments);
+    }
 
+    public void loadConfig() {
+        loadDefaultConfig();
+    }
+
+    public void loadDefaultConfig() {
+        addComment(LANG_CONFIG_KEY, "Translations can be found under the plugins/SheetsApi/lang");
+        setValue(LANG_CONFIG_KEY, "en_us");
+
+        configuration.setDefaults(configuration);
     }
 }
