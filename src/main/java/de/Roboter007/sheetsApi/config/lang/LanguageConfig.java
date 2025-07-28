@@ -3,7 +3,10 @@ package de.Roboter007.sheetsApi.config.lang;
 import de.Roboter007.sheetsApi.config.SheetsConfig;
 import de.Roboter007.sheetsApi.utils.JavaUtils;
 import de.Roboter007.sheetsApi.utils.PathsUtils;
+import net.kyori.adventure.text.Component;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -77,9 +80,25 @@ public abstract class LanguageConfig {
         }
     }
 
+    public void sendMessageWithPlaceholder(Player player, String messageKey, LangPlaceholderTypes langPlaceholderType, String replacement) {
+        player.sendMessage(Component.text(getMessageWithPlaceholder(messageKey, langPlaceholderType, replacement)));
+    }
+
+    public void sendMessage(Player player, String messageKey) {
+        player.sendMessage(Component.text(getMessage(messageKey)));
+    }
+
 
     public JavaPlugin getPlugin() {
         return plugin;
+    }
+
+    public String getMessageWithPlaceholder(String messageKey, LangPlaceholderTypes langPlaceholderType, String replacement) {
+        String message = getMessage(messageKey);
+        if(message.contains(langPlaceholderType.getPlaceholder())) {
+            message = message.replace(langPlaceholderType.getPlaceholder(), replacement);
+        }
+        return message;
     }
 
     public String getMessage(String messageKey) {
