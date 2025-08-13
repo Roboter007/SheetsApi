@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.Roboter007</groupId>
     <artifactId>SheetsApi</artifactId>
-    <version>v0.3.2</version>
+    <version>v0.3.3</version>
 
-        <repositories>
+    <repositories>
         <repository>
             <id>papermc-repo</id>
             <url>https://repo.papermc.io/repository/maven-public/</url>
@@ -30,8 +30,6 @@
 
     <properties>
         <java.version>22</java.version>
-        <maven.compiler.source>24</maven.compiler.source>
-        <maven.compiler.target>24</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
