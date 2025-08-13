@@ -103,11 +103,6 @@ public abstract class SheetsPlugin extends JavaPlugin {
     public void onLoad() {
         SheetsApi.addPluginToApi(this);
 
-        SheetsListeners.registerListener(this, new SheetsListener(this));
-
-        SheetsCommands.registerAllCommands(this);
-        SheetsListeners.registerAllListeners(this);
-
         playerDataManager = new PlayerDataManager(this);
 
         loadDefaultSheetConfig();
@@ -117,7 +112,10 @@ public abstract class SheetsPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        super.onEnable();
+        SheetsListeners.registerListener(this, new SheetsListener(this));
+
+        SheetsCommands.registerAllCommands(this);
+        SheetsListeners.registerAllListeners(this);
     }
 
     @Override
