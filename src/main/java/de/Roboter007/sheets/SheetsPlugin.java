@@ -7,8 +7,11 @@ import de.Roboter007.sheets.data.player.PlayerDataConfig;
 import de.Roboter007.sheets.data.player.PlayerDataManager;
 import de.Roboter007.sheets.api.listeners.SheetsListeners;
 import de.Roboter007.sheets.listener.SheetsListener;
+import de.Roboter007.sheets.utils.HtmlColors;
 import de.Roboter007.sheets.utils.JavaUtils;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -17,6 +20,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -86,13 +90,13 @@ public abstract class SheetsPlugin extends JavaPlugin {
     }
 
     private void addComment(String key, String message) {
-        List<String> comments = config().getComments(key);
+        ArrayList<String> comments = new ArrayList<>(config().getComments(key));
         comments.add(message);
         config().setInlineComments(key, comments);
     }
 
 
-    public void loadDefaultSheetConfig() {
+    public void loadSheetConfigOptions() {
         addComment(LANG_CONFIG_KEY, "Translations can be found under the plugins/SheetsApi/lang");
         setConfigValue(LANG_CONFIG_KEY, "en_us");
     }
@@ -101,20 +105,25 @@ public abstract class SheetsPlugin extends JavaPlugin {
 
     @Override
     public void onLoad() {
+        Bukkit.getServer().sendMessage(Component.text(this.getName() + " is using SheetsApi").color(HtmlColors.yellow.getTextColor()));
         SheetsApi.addPluginToApi(this);
     }
 
     @Override
     public void onEnable() {
+        // Listener & Command Registry
         SheetsListeners.registerListener(this, new SheetsListener(this));
 
-        SheetsCommands.registerAllCommands(this);
         SheetsListeners.registerAllListeners(this);
+        SheetsCommands.registerAllCommands(this);
 
+        // Player Data Manager
         playerDataManager = new PlayerDataManager(this);
 
-        loadDefaultSheetConfig();
+        // Load needed Sheet Config Options into Plugin Config
+        loadSheetConfigOptions();
 
+        // Load lang Config
         langConfig().load();
     }
 
