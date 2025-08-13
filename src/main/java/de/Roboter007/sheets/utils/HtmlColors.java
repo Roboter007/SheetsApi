@@ -1,4 +1,4 @@
-package de.Roboter007.sheetsApi.utils;
+package de.Roboter007.sheets.utils;
 
 import net.kyori.adventure.text.format.TextColor;
 

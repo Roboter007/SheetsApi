@@ -1,12 +1,10 @@
-package de.Roboter007.sheetsApi.config.lang;
+package de.Roboter007.sheets.config.lang;
 
-import de.Roboter007.sheetsApi.config.SheetsConfig;
-import de.Roboter007.sheetsApi.utils.JavaUtils;
-import de.Roboter007.sheetsApi.utils.PathsUtils;
+import de.Roboter007.sheets.SheetsPlugin;
+import de.Roboter007.sheets.utils.JavaUtils;
 import net.kyori.adventure.text.Component;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,16 +13,18 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
 
-public abstract class LanguageConfig {
-    public static Path LANG_FOLDER_PATH = JavaUtils.getPathAddition(PathsUtils.PLUGINS_FOLDER_PATH, "/SheetsApi/lang/");
+//ToDo: add LanguageManager & split the lang config from this manager -> implement SheetsConfigFile System for this
+// LanguageManager should be available in SheetsPlugin.class
 
-    private final JavaPlugin plugin;
-    private final Path path;
+public abstract class LanguageConfig {
     public static HashMap<String, HashMap<String, String>> LANGUAGE_CONFIG_MAP = new HashMap<>();
 
-    public LanguageConfig(JavaPlugin plugin) {
+    private final SheetsPlugin plugin;
+    private final Path path;
+
+    public LanguageConfig(SheetsPlugin plugin) {
         this.plugin = plugin;
-        this.path = JavaUtils.getPathAddition(LANG_FOLDER_PATH, plugin.getName());
+        this.path = JavaUtils.getModifiedPath(plugin.getDataPath(), "/lang/");
     }
 
     public void load() {
@@ -101,7 +101,7 @@ public abstract class LanguageConfig {
     }
 
     public String getMessage(String messageKey) {
-        return getMessageInLang(messageKey, SheetsConfig.getValue(SheetsConfig.LANG_CONFIG_KEY, "en_us"));
+        return getMessageInLang(messageKey, plugin.getConfigValue(SheetsPlugin.LANG_CONFIG_KEY, "en_us"));
     }
 
     public String getMessageInLang(String messageKey, String lang) {

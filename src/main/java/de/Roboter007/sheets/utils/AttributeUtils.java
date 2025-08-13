@@ -1,4 +1,4 @@
-package de.Roboter007.sheetsApi.utils;
+package de.Roboter007.sheets.utils;
 
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;

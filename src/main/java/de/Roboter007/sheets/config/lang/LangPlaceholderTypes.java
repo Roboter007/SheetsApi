@@ -1,4 +1,4 @@
-package de.Roboter007.sheetsApi.config.lang;
+package de.Roboter007.sheets.config.lang;
 
 public enum LangPlaceholderTypes {
     PLAYER_NAME("%playerName%"),

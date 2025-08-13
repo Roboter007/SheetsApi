@@ -1,4 +1,4 @@
-package de.Roboter007.sheetsApi.commands;
+package de.Roboter007.sheets.api.commands;
 
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;

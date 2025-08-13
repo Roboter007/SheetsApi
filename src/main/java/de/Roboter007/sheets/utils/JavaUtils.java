@@ -1,6 +1,6 @@
-package de.Roboter007.sheetsApi.utils;
+package de.Roboter007.sheets.utils;
 
-import de.Roboter007.sheetsApi.SheetsApi;
+import de.Roboter007.sheets.SheetsApi;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -19,14 +19,24 @@ public class JavaUtils {
         return new ArrayList<>(List.of(object));
     }
 
-    public static Path getPathAddition(Path path, String addition) {
-        Path pathWithAddition = Path.of(path.toString() + addition);
-        if(!pathWithAddition.toFile().exists()) {
-            if(!pathWithAddition.toFile().mkdirs()) {
-                SheetsApi.getPluginLogger().severe("Couldn't create path: " + pathWithAddition);
+    public static Path getModifiedPath(Path prefix, String suffix) {
+        Path path = Path.of(prefix.toString() + suffix);
+        if(!path.toFile().exists()) {
+            if(!path.toFile().mkdirs()) {
+                SheetsApi.getLogger().severe("Couldn't create path: " + path);
             }
         }
-        return pathWithAddition;
+        return path;
+    }
+
+    public static Path getModifiedPath(String prefix, Path suffix) {
+        Path path = Path.of(prefix + suffix.toString());
+        if(!path.toFile().exists()) {
+            if(!path.toFile().mkdirs()) {
+                SheetsApi.getLogger().severe("Couldn't create path: " + path);
+            }
+        }
+        return path;
     }
 
     public static String removeYmlFromString(String str) {
