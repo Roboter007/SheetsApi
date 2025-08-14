@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class SheetsApi {
 
     public static String NAME = "Sheets Api";
-    public static String VERSION = "v0.3.7";
+    public static String VERSION = "v0.3.8";
 
     private static final Logger SHEETS_LOGGER = Logger.getLogger(NAME);
 
