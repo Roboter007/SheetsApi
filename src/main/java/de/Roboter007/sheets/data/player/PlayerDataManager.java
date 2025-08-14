@@ -19,8 +19,6 @@ import java.util.UUID;
 
 public class PlayerDataManager {
 
-    private final
-
     private final SheetsPlugin plugin;
     private final Path path;
 
