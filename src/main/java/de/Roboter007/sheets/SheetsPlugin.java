@@ -6,6 +6,7 @@ import de.Roboter007.sheets.data.player.PlayerData;
 import de.Roboter007.sheets.data.player.PlayerDataConfig;
 import de.Roboter007.sheets.data.player.PlayerDataManager;
 import de.Roboter007.sheets.api.listeners.SheetsListeners;
+import de.Roboter007.sheets.events.PlayerDataCheckEvent;
 import de.Roboter007.sheets.listener.SheetsListener;
 import de.Roboter007.sheets.utils.HtmlColors;
 import de.Roboter007.sheets.utils.JavaUtils;
@@ -13,6 +14,8 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -24,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public abstract class SheetsPlugin extends JavaPlugin {
+public abstract class SheetsPlugin extends JavaPlugin implements Listener {
 
     public static final String LANG_CONFIG_KEY = "lang";
 
@@ -65,6 +68,12 @@ public abstract class SheetsPlugin extends JavaPlugin {
 
     public File uuidToPlayerDataFile(@NotNull UUID uuid) {
         return JavaUtils.getModifiedPath(getPlayerDataFolderPath(), uuid + ".yml").toFile();
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerDataCheckEvent event) {
+        SheetsApi.getLogger().info("Checking for Missing Player Data...");
+        this.getPlayerDataManager().checkForMissingPlayerData(event.getPlayer().getUniqueId());
     }
 
     // manage Plugin Config
@@ -112,8 +121,6 @@ public abstract class SheetsPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         // Listener & Command Registry
-        SheetsListeners.registerListener(this, new SheetsListener(this));
-
         SheetsListeners.registerAllListeners(this);
         SheetsCommands.registerAllCommands(this);
 
