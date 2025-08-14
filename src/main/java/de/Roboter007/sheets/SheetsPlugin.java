@@ -6,7 +6,7 @@ import de.Roboter007.sheets.data.player.PlayerData;
 import de.Roboter007.sheets.data.player.PlayerDataConfig;
 import de.Roboter007.sheets.data.player.PlayerDataManager;
 import de.Roboter007.sheets.api.listeners.SheetsListeners;
-import de.Roboter007.sheets.events.PlayerDataCheckEvent;
+import de.Roboter007.sheets.listener.SheetsListener;
 import de.Roboter007.sheets.utils.HtmlColors;
 import de.Roboter007.sheets.utils.JavaUtils;
 import net.kyori.adventure.text.Component;
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public abstract class SheetsPlugin extends JavaPlugin implements Listener {
+public abstract class SheetsPlugin extends JavaPlugin {
 
     public static final String LANG_CONFIG_KEY = "lang";
 
@@ -66,13 +66,7 @@ public abstract class SheetsPlugin extends JavaPlugin implements Listener {
     }
 
     public File uuidToPlayerDataFile(@NotNull UUID uuid) {
-        return JavaUtils.getModifiedPath(getPlayerDataFolderPath(), uuid + ".yml").toFile();
-    }
-
-    @EventHandler
-    public void onPlayerJoin(PlayerDataCheckEvent event) {
-        SheetsApi.getLogger().info("Checking for Missing Player Data...");
-        this.getPlayerDataManager().checkForMissingPlayerData(event.getPlayer().getUniqueId());
+        return JavaUtils.getModifiedPath(getPlayerDataFolderPath(), "/" + uuid + ".yml").toFile();
     }
 
     // manage Plugin Config
@@ -120,6 +114,8 @@ public abstract class SheetsPlugin extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         // Listener & Command Registry
+        SheetsListeners.registerListener(this, new SheetsListener(this));
+
         SheetsListeners.registerAllListeners(this);
         SheetsCommands.registerAllCommands(this);
 
