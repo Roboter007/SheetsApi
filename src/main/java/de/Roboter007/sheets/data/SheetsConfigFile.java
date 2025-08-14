@@ -16,9 +16,16 @@ public abstract class SheetsConfigFile {
     protected FileConfiguration config;
     protected final File file;
 
-    public SheetsConfigFile(File file) {
+    protected final HashMap<String, Object> defaultConfigMap;
+
+    public SheetsConfigFile(File file, @Nullable HashMap<String, Object> defaultConfigMap) {
         this.file = file;
+        this.defaultConfigMap = defaultConfigMap;
         this.config = load();
+    }
+
+    public SheetsConfigFile(File file) {
+        this(file, null);
     }
 
     public File getFile() {
@@ -45,8 +52,8 @@ public abstract class SheetsConfigFile {
         createFile();
 
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
-        if(getDefaults() != null && !getDefaults().isEmpty()) {
-            config.addDefaults(getDefaults());
+        if(defaultConfigMap != null && !defaultConfigMap.isEmpty()) {
+            config.addDefaults(defaultConfigMap);
         }
         return config;
     }
@@ -56,7 +63,9 @@ public abstract class SheetsConfigFile {
     }
 
     @Nullable
-    public abstract HashMap<String, Object> getDefaults();
+    public HashMap<String, Object> getDefaults() {
+        return defaultConfigMap;
+    }
 
 
     public void save() {

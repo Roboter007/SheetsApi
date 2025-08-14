@@ -15,10 +15,11 @@ public class PlayerDataConfig extends SheetsConfigFile {
     private final SheetsPlugin plugin;
 
     public PlayerDataConfig(@NotNull SheetsPlugin plugin, @NotNull UUID uuid, @Nullable PlayerData playerData) {
-        super(plugin.uuidToPlayerDataFile(uuid));
+        super(plugin.uuidToPlayerDataFile(uuid), plugin.getDefault().getPlayerData());
         this.plugin = plugin;
         this.uuid = uuid;
         this.playerData = playerData;
+
         if(playerData != null) {
             playerData.loadInConfig(this.config);
         } else {
@@ -60,11 +61,6 @@ public class PlayerDataConfig extends SheetsConfigFile {
     public void reset() {
         playerData = plugin.getDefault();
         playerData.loadInConfig(this.getConfig());
-    }
-
-    @Override
-    public @Nullable HashMap<String, Object> getDefaults() {
-        return plugin.getDefault().getPlayerData();
     }
 }
 

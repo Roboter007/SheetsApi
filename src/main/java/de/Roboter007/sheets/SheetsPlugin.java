@@ -7,7 +7,6 @@ import de.Roboter007.sheets.data.player.PlayerDataConfig;
 import de.Roboter007.sheets.data.player.PlayerDataManager;
 import de.Roboter007.sheets.api.listeners.SheetsListeners;
 import de.Roboter007.sheets.events.PlayerDataCheckEvent;
-import de.Roboter007.sheets.listener.SheetsListener;
 import de.Roboter007.sheets.utils.HtmlColors;
 import de.Roboter007.sheets.utils.JavaUtils;
 import net.kyori.adventure.text.Component;
