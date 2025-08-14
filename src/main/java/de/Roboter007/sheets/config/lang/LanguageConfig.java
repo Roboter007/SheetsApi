@@ -24,7 +24,7 @@ public abstract class LanguageConfig {
 
     public LanguageConfig(SheetsPlugin plugin) {
         this.plugin = plugin;
-        this.path = JavaUtils.getModifiedPath(plugin.getDataPath(), "/lang/");
+        this.path = JavaUtils.getModifiedPath(plugin.getDataPath(), "/lang/", JavaUtils.PathType.DIRECTORY);
     }
 
     public void load() {

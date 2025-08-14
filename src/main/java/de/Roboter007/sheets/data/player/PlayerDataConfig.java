@@ -5,7 +5,6 @@ import de.Roboter007.sheets.data.SheetsConfigFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
 import java.util.UUID;
 
 public class PlayerDataConfig extends SheetsConfigFile {

@@ -62,11 +62,11 @@ public abstract class SheetsPlugin extends JavaPlugin {
     }
 
     public Path getPlayerDataFolderPath() {
-        return JavaUtils.getModifiedPath(getPluginFolderPath(), "/players/");
+        return JavaUtils.getModifiedPath(getPluginFolderPath(), "/players/", JavaUtils.PathType.DIRECTORY);
     }
 
     public File uuidToPlayerDataFile(@NotNull UUID uuid) {
-        return JavaUtils.getModifiedPath(getPlayerDataFolderPath(), "/" + uuid + ".yml").toFile();
+        return JavaUtils.getModifiedPath(getPlayerDataFolderPath(), "/" + uuid + ".yml", JavaUtils.PathType.FILE).toFile();
     }
 
     // manage Plugin Config
