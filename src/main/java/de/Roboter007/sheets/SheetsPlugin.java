@@ -1,9 +1,9 @@
 package de.Roboter007.sheets;
 
 import de.Roboter007.sheets.api.commands.SheetsCommands;
-import de.Roboter007.sheets.config.lang.LanguageConfig;
+import de.Roboter007.sheets.config.lang.LanguageManager;
+import de.Roboter007.sheets.config.lang.Translation;
 import de.Roboter007.sheets.data.player.PlayerData;
-import de.Roboter007.sheets.data.player.PlayerDataConfig;
 import de.Roboter007.sheets.data.player.PlayerDataManager;
 import de.Roboter007.sheets.api.listeners.SheetsListeners;
 import de.Roboter007.sheets.listener.SheetsListener;
@@ -11,16 +11,12 @@ import de.Roboter007.sheets.utils.HtmlColors;
 import de.Roboter007.sheets.utils.JavaUtils;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +26,7 @@ public abstract class SheetsPlugin extends JavaPlugin {
 
     public static final String LANG_CONFIG_KEY = "lang";
 
-
+    private LanguageManager languageManager = null;
     private PlayerDataManager playerDataManager = null;
 
     public SheetsPlugin() {
@@ -39,9 +35,9 @@ public abstract class SheetsPlugin extends JavaPlugin {
 
     // Api settings
 
-    public abstract LanguageConfig langConfig();
+    public abstract PlayerData getDefaultPlayerData();
 
-    public abstract PlayerData getDefault();
+    public abstract List<Translation> getDefaultTranslations();
 
 
     // Shortcuts
@@ -103,6 +99,22 @@ public abstract class SheetsPlugin extends JavaPlugin {
         setConfigValue(LANG_CONFIG_KEY, "en_us");
     }
 
+    // manage Lang Config
+
+
+    public LanguageManager getLanguageManager() {
+        return languageManager;
+    }
+
+    public String getPluginLang() {
+        return getConfigValue(LANG_CONFIG_KEY, "en_us");
+    }
+
+    public Path getLangConfigFolder() {
+        return JavaUtils.getModifiedPath(getPluginFolderPath(), "/lang/", JavaUtils.PathType.DIRECTORY);
+    }
+
+
     // Hook into onLoad/onEnable/onDisable
 
     @Override
@@ -126,7 +138,7 @@ public abstract class SheetsPlugin extends JavaPlugin {
         loadSheetConfigOptions();
 
         // Load lang Config
-        langConfig().load();
+        this.languageManager = new LanguageManager(this);
     }
 
     @Override

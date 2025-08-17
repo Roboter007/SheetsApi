@@ -14,7 +14,7 @@ public class PlayerDataConfig extends SheetsConfigFile {
     private final SheetsPlugin plugin;
 
     public PlayerDataConfig(@NotNull SheetsPlugin plugin, @NotNull UUID uuid, @Nullable PlayerData playerData) {
-        super(plugin.uuidToPlayerDataFile(uuid), plugin.getDefault().getPlayerData());
+        super(plugin.uuidToPlayerDataFile(uuid), plugin.getDefaultPlayerData().getPlayerData());
         this.plugin = plugin;
         this.uuid = uuid;
         this.playerData = playerData;
@@ -58,7 +58,7 @@ public class PlayerDataConfig extends SheetsConfigFile {
     }
 
     public void reset() {
-        playerData = plugin.getDefault();
+        playerData = plugin.getDefaultPlayerData();
         playerData.loadInConfig(this.getConfig());
     }
 }

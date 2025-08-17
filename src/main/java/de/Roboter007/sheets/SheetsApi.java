@@ -1,6 +1,5 @@
 package de.Roboter007.sheets;
 
-import de.Roboter007.sheets.api.listeners.SheetsListeners;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -10,7 +9,7 @@ import java.util.logging.Logger;
 public class SheetsApi {
 
     public static String NAME = "Sheets Api";
-    public static String VERSION = "v0.3.11";
+    public static String VERSION = "v0.4.0";
 
     private static final Logger SHEETS_LOGGER = Logger.getLogger(NAME);
 

@@ -15,5 +15,9 @@ public enum LangPlaceholderTypes {
         return placeholder;
     }
 
+    public String replacePlaceholder(String string, String data) {
+        return string.replace(this.getPlaceholder(), data);
+    }
+
 
 }

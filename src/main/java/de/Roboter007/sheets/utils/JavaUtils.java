@@ -53,11 +53,12 @@ public class JavaUtils {
     }
 
     public static String removeYmlFromString(String str) {
-        String result = null;
-        if (str != null && !str.isEmpty()) {
-            result = str.substring(0, str.length() - 4);
+        if (str != null && str.contains(".yml")) {
+            return str.substring(0, str.length() - 4);
+        } else {
+            SheetsApi.getLogger().warning("unnecessary use of removeYmlFromString for str: " + str);
         }
-        return result;
+        return str;
     }
 
     public static List<String> readLines(String path) {
