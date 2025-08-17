@@ -1,4 +1,4 @@
-package de.Roboter007.sheets.data.player;
+package de.Roboter007.sheets.config.player;
 
 import org.bukkit.configuration.file.FileConfiguration;
 

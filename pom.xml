@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.Roboter007</groupId>
     <artifactId>SheetsApi</artifactId>
-    <version>v0.4.0</version>
+    <version>v0.4.1</version>
 
     <repositories>
         <repository>

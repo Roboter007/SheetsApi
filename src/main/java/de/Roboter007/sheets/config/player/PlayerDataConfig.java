@@ -1,7 +1,7 @@
-package de.Roboter007.sheets.data.player;
+package de.Roboter007.sheets.config.player;
 
 import de.Roboter007.sheets.SheetsPlugin;
-import de.Roboter007.sheets.data.SheetsConfigFile;
+import de.Roboter007.sheets.config.SheetsConfigFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

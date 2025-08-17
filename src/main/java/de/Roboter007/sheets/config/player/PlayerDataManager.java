@@ -1,9 +1,8 @@
-package de.Roboter007.sheets.data.player;
+package de.Roboter007.sheets.config.player;
 
 import de.Roboter007.sheets.SheetsApi;
 import de.Roboter007.sheets.SheetsPlugin;
 import de.Roboter007.sheets.utils.JavaUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;

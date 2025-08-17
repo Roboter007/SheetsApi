@@ -1,7 +1,7 @@
 package de.Roboter007.sheets.config.lang;
 
 import de.Roboter007.sheets.SheetsPlugin;
-import de.Roboter007.sheets.data.SheetsConfigFile;
+import de.Roboter007.sheets.config.SheetsConfigFile;
 import de.Roboter007.sheets.utils.JavaUtils;
 import org.jetbrains.annotations.NotNull;
 

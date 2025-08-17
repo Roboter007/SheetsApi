@@ -79,4 +79,12 @@ public class LanguageManager {
     public String getMessage(String messageKey) {
         return getMessageInLang(messageKey, plugin.getPluginLang());
     }
+
+    public String getMessageWithPlaceholder(String messageKey, LangPlaceholderTypes langPlaceholderType, String replacement) {
+        String message = getMessage(messageKey);
+        if(message.contains(langPlaceholderType.getPlaceholder())) {
+            message = message.replace(langPlaceholderType.getPlaceholder(), replacement);
+        }
+        return message;
+    }
 }

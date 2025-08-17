@@ -1,4 +1,4 @@
-package de.Roboter007.sheets.data;
+package de.Roboter007.sheets.config;
 
 import de.Roboter007.sheets.SheetsApi;
 import org.bukkit.configuration.file.FileConfiguration;
